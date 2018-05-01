@@ -5,13 +5,16 @@ import java.util.Scanner;
 public class MinHeap {
 
 	public static double[] getMedians(int[] array) {
+		// MAX HEAP
 		PriorityQueue<Integer> lowers = new PriorityQueue<>(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer left, Integer right) {
 				return -1 * left.compareTo(right);
 			}
 		});
+		// MIN HEAP
 		PriorityQueue<Integer> uppers = new PriorityQueue<>();
+		
 		double[] medians = new double[array.length];
 		for (int i = 0; i < array.length; i++) {
 			int number = array[i];
