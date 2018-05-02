@@ -14,7 +14,7 @@ public class MinHeap {
 		});
 		// MIN HEAP
 		PriorityQueue<Integer> uppers = new PriorityQueue<>();
-		
+
 		double[] medians = new double[array.length];
 		for (int i = 0; i < array.length; i++) {
 			int number = array[i];
@@ -29,10 +29,11 @@ public class MinHeap {
 	private static double getMedian(PriorityQueue<Integer> lowers, PriorityQueue<Integer> uppers) {
 		PriorityQueue<Integer> biggerHeap = lowers.size() > uppers.size() ? lowers : uppers;
 		PriorityQueue<Integer> smallerHeap = lowers.size() > uppers.size() ? uppers : lowers;
-		
-		if(biggerHeap.size() == smallerHeap.size()) {
-			return ((double)biggerHeap.peek() + smallerHeap.peek()) / 2;
-		}else {
+
+		if (biggerHeap.size() == smallerHeap.size()) { // If it's and even number of elements, you need to do this.
+			return ((double) biggerHeap.peek() + smallerHeap.peek()) / 2;
+		} else { // If one of the heaps has an odd number of elements, it will be in the "bigger"
+					// Q, so peek that head item as median
 			return biggerHeap.peek();
 		}
 	}
@@ -40,15 +41,20 @@ public class MinHeap {
 	private static void rebalance(PriorityQueue<Integer> lowers, PriorityQueue<Integer> uppers) {
 		PriorityQueue<Integer> biggerHeap = lowers.size() > uppers.size() ? lowers : uppers;
 		PriorityQueue<Integer> smallerHeap = lowers.size() > uppers.size() ? uppers : lowers;
-		if(biggerHeap.size() - smallerHeap.size() >= 2) {
+		/*
+		 * If there is a difference of two or more in size between these, poll the head
+		 * item off and move to the other. If the bigger heap is the max heap, this will
+		 * take the biggest number off the max heap and append it to the min heap
+		 */
+		if (biggerHeap.size() - smallerHeap.size() >= 2) {
 			smallerHeap.add(biggerHeap.poll());
 		}
 	}
 
 	private static void addNumber(int number, PriorityQueue<Integer> lowers, PriorityQueue<Integer> uppers) {
-		if(lowers.isEmpty() || number < lowers.peek()) {
+		if (lowers.isEmpty() || number < lowers.peek()) {
 			lowers.add(number);
-		}else {
+		} else {
 			uppers.add(number);
 		}
 	}
