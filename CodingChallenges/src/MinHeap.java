@@ -1,4 +1,5 @@
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -43,11 +44,17 @@ public class MinHeap {
 		PriorityQueue<Integer> smallerHeap = lowers.size() > uppers.size() ? uppers : lowers;
 		/*
 		 * If there is a difference of two or more in size between these, poll the head
-		 * item off and move to the other. If the bigger heap is the max heap, this will
-		 * take the biggest number off the max heap and append it to the min heap
+		 * item off and move to the other. Note that the head of each heap is going to
+		 * be the closest to the median so moving from one q to the other doesn't do
+		 * much other than balance the two heaps evenly. Your respective heads will
+		 * still be on either side of the median.
 		 */
 		if (biggerHeap.size() - smallerHeap.size() >= 2) {
+			//System.out.println("Before Swap: " + Objects.toString(lowers));
+			//System.out.println("Before Swap: " + Objects.toString(uppers));
 			smallerHeap.add(biggerHeap.poll());
+			//System.out.println("After Swap:  " + Objects.toString(lowers));
+			//System.out.println("After Swap:  " + Objects.toString(uppers));
 		}
 	}
 
