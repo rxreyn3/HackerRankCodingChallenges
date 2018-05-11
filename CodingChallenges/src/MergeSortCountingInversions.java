@@ -16,10 +16,10 @@ public class MergeSortCountingInversions {
 	private static void mergesort(int[] array, int[] temp, int startIndex, int endIndex) {
 		if (startIndex >= endIndex)
 			return;
-		int pivot = (startIndex + endIndex) / 2;
+		int middle = (startIndex + endIndex) / 2;
 			
-		mergesort(array, temp, startIndex, pivot); // Merge Left side
-		mergesort(array, temp, pivot + 1, endIndex); // Merge Right Side
+		mergesort(array, temp, startIndex, middle); // Merge Left side
+		mergesort(array, temp, middle + 1, endIndex); // Merge Right Side
 		mergeHalves(array, temp, startIndex, endIndex);
 	}
 
@@ -51,12 +51,12 @@ public class MergeSortCountingInversions {
 			index++;
 		}
 		
-		System.out.println("pre-copy   { temp  } : " + Arrays.toString(temp));
-		System.out.println("pre-copy   { array } : " + Arrays.toString(array));
+		//System.out.println("pre-copy   { temp  } : " + Arrays.toString(temp));
+		//System.out.println("pre-copy   { array } : " + Arrays.toString(array));
 
 		System.arraycopy(array, left, temp, index, leftEnd - left + 1);
 		System.arraycopy(array, right, temp, index, rightEnd - right + 1);
-		System.arraycopy(temp, 0, array, 0, size);
+		System.arraycopy(temp, leftStart, array, leftStart, size);
 		
 		System.out.println("post-copy  [ temp  ] : " + Arrays.toString(temp));
 		System.out.println("post-copy  [ array ] : " + Arrays.toString(array));
